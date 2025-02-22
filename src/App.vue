@@ -1,26 +1,28 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+
+  <IntroPart/>
+
+  <ChordSettings/>
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import IntroPart from './components/Intro.vue'
+import ChordSettings from './components/ChordSettings.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    IntroPart,
+    ChordSettings
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+ChordSettings {
+  background-color: black;
 }
+
 </style>
