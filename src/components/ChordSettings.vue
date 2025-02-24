@@ -2,9 +2,9 @@
 
   <div class="settings">
 
-    <h2>Select Chord:</h2>
+    <h2>Select Chord</h2>
 
-    <div class="method1">
+    <div class="selection">
 
       <div v-for="(option, index) in dropdownOptions" :key="index" class="dropdown">
 
@@ -114,22 +114,20 @@ export default {
 }
 
 .settings {
-  width: 100%;
-  padding-bottom: 3%;
-  background-color: #e7ecef;
+  min-width: 50%;
 }
 
 h2 {
   color: #3e4c57;
-  width: 30%;
-  margin: auto;
+  text-align: center;
+  font-family: "Roboto Condensed", serif;
+  font-size: 1.5em;
+  font-weight: 500;
 }
 
-.method1 {
+.selection {
   display: flex;
-  width: 30%;
-  height: 15vh;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin: auto;
 }
@@ -140,13 +138,12 @@ h2 {
 }
 
 .dropdown p {
-  width: 100%;
   font-family: "Roboto Condensed", serif;
   margin: 5% 0;
   color: #6096BA;
 }
 
-select {
+.dropdown select {
   padding: 4px;
   border: 1px solid #ccc;
   border-radius: 4px;

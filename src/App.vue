@@ -21,8 +21,8 @@ export default {
 
 <style>
 
-ChordSettings {
-  background-color: black;
+body {
+  background-color: #e7ecef;
 }
 
 </style>

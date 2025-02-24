@@ -27,7 +27,6 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 .intro {
-  background-color: #e7ecef;
   padding: 7vh 0;
   width: 100%;
   text-align: center;
