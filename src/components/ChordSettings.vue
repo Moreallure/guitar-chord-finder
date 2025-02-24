@@ -64,21 +64,24 @@ export default {
           id: 'quality',
           label: 'Quality',
           values: [
-            { value: '', label: 'Major' },
-            { value: 'm', label: 'Minor' },
-            { value: '', label: 'Diminished' },
-            { value: '', label: 'Augmented' }
+            { value: '', label: 'major' },
+            { value: 'm', label: 'minor' },
+            { value: '', label: 'diminished' },
+            { value: '', label: 'augmented' }
           ]
         },
         {
           id: 'extension',
           label: 'Extension',
           values: [
-            { value: '', label: 'None' },
+            { value: '', label: '---' },
             { value: '7', label: '7' },
             { value: '9', label: '9' },
             { value: '11', label: '11' },
-            { value: '13', label: '13' }
+            { value: '13', label: '13' },
+            { value: 'maj7', label: 'maj7' },
+            { value: 'maj9', label: 'maj9' },
+            { value: 'maj11', label: 'maj11' },
           ]
         }
       ],
@@ -156,7 +159,6 @@ select {
 }
 
 #quality, #extension {
-  font-family: "Roboto Condensed", serif;
   font-size: 1.3em;
 }
 
