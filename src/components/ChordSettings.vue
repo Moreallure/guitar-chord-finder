@@ -56,8 +56,8 @@ export default {
           label: 'Accidental',
           values: [
             { value: '', label: '♮' },
-            { value: '', label: '♯' },
-            { value: '', label: '♭' }
+            { value: '\uE102', label: '♯' },
+            { value: '\uE100', label: '♭' }
           ]
         },
         {
@@ -66,8 +66,10 @@ export default {
           values: [
             { value: '', label: 'major' },
             { value: 'm', label: 'minor' },
-            { value: '', label: 'diminished' },
-            { value: '', label: 'augmented' }
+            { value: 'dim', label: 'diminished' },
+            { value: 'aug', label: 'augmented' },
+            { value: 'sus\u200B2', label: 'sus2' },
+            { value: 'sus\u200B4', label: 'sus4' }
           ]
         },
         {
@@ -81,7 +83,7 @@ export default {
             { value: '13', label: '13' },
             { value: 'maj7', label: 'maj7' },
             { value: 'maj9', label: 'maj9' },
-            { value: 'maj11', label: 'maj11' },
+            { value: 'maj11', label: 'maj11' }
           ]
         }
       ],
@@ -97,6 +99,9 @@ export default {
   methods: {
     updateChord() {
       this.chordDisplay = this.chord.join("");
+      if (this.chord[3] !== "" && this.chord[2] !== "") {
+        this.chordDisplay = `${this.chord[0]}${this.chord[1]}${this.chord[2]}(${this.chord[3]})`
+      }
     }
   }
 
@@ -120,7 +125,7 @@ export default {
 h2 {
   color: #3e4c57;
   text-align: center;
-  font-family: "Roboto Condensed", serif;
+  font-family: "Roboto Condensed", Helvetica;
   font-size: 1.5em;
   font-weight: 500;
 }
@@ -138,7 +143,7 @@ h2 {
 }
 
 .dropdown p {
-  font-family: "Roboto Condensed", serif;
+  font-family: "Roboto Condensed", Helvetica;
   margin: 5% 0;
   color: #6096BA;
 }
@@ -151,7 +156,7 @@ h2 {
   height: 50px;
   min-width: 70px;
   text-align: center;
-  font-family: "Roboto Condensed", serif;
+  font-family: "Roboto Condensed", Helvetica;
   font-size: 2em;
 }
 

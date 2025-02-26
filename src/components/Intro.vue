@@ -33,7 +33,7 @@ export default {
 }
 
 h1 {
-  font-family: "Archivo Black", serif;
+  font-family: "Archivo Black", Helvetica;
   font-size: 3.5em;
   color: #1e3f65;
   padding: 0 10%;
@@ -41,7 +41,7 @@ h1 {
 }
 
 h2 {
-  font-family: "Roboto Condensed", serif;
+  font-family: "Roboto Condensed", Helvetica;
   font-weight: 400;
   font-size: 1.7em;
   margin-top: 1%;
@@ -50,7 +50,7 @@ h2 {
 }
 
 a {
-  font-family: "Montserrat", serif;
+  font-family: "Montserrat", Helvetica;
   text-decoration: none;
   font-size: 1em;
   font-weight: 400;
