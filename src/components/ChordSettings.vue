@@ -22,7 +22,7 @@
 
     </div>
 
-    <h1 id="chord">{{ chordDisplay }}</h1>
+    <h1 v-html="chordDisplay" id="chord"></h1>
 
   </div>
 
@@ -56,8 +56,8 @@ export default {
           label: 'Accidental',
           values: [
             { value: '', label: '♮' },
-            { value: '\uE102', label: '♯' },
-            { value: '\uE100', label: '♭' }
+            { value: '\u266F', label: '♯' },
+            { value: '\u266D', label: '♭' }
           ]
         },
         {
@@ -81,9 +81,11 @@ export default {
             { value: '9', label: '9' },
             { value: '11', label: '11' },
             { value: '13', label: '13' },
-            { value: 'maj7', label: 'maj7' },
-            { value: 'maj9', label: 'maj9' },
-            { value: 'maj11', label: 'maj11' }
+            { value: 'maj\u200B7', label: 'maj7' },
+            { value: 'maj\u200B9', label: 'maj9' },
+            { value: 'maj\u200B11', label: 'maj11' },
+            { value: 'maj\u200B13', label: 'maj13' },
+            { value: 'add\u200B9', label: 'add9' },
           ]
         }
       ],
@@ -98,10 +100,32 @@ export default {
 
   methods: {
     updateChord() {
-      this.chordDisplay = this.chord.join("");
-      if (this.chord[3] !== "" && this.chord[2] !== "") {
-        this.chordDisplay = `${this.chord[0]}${this.chord[1]}${this.chord[2]}(${this.chord[3]})`
+
+      let chord = JSON.parse(JSON.stringify(this.chord)) // deep copy chord
+
+      if (chord[2] !== "" && (chord[3].includes("maj") || chord[3].includes("add"))) { // add brakets, ex. Cm(maj7)
+        if (chord[2].includes("sus")) { // swap for sus
+          chord[2] = `(${chord[2]})`
+        } else {
+          chord[3] = `(${chord[3]})`
+        }
       }
+
+      if (chord[3].includes("maj") || chord[3].includes("add")) { // superior for maj & add
+        chord[3] = `<sup>${chord[3]}</sup>`
+      }
+      if (chord[2].includes("dim") || chord[2].includes("aug") || chord[2].includes("sus")) { // superior for dim, aug & sus
+        chord[2] = `<sup>${chord[2]}</sup>`
+      }
+      if (chord[2].includes("sus")) { // swap for sus
+        [chord[2], chord[3]] = [chord[3], chord[2]];
+      }
+
+      this.chordDisplay = chord.join("")
+
+      console.log(this.chordDisplay)
+      console.log(this.chord)
+
     }
   }
 
