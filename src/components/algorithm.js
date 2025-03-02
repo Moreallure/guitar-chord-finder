@@ -1,6 +1,6 @@
 function getPossibleChords(fretNumber, stringValues, chordNotes, maxDifference, mustIncludeAll) {
 
-    const allNotes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+    const notesMap = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
     function hasDifferenceGreaterThanN(difference, numbers) {
         for (let i = 0; i < numbers.length; i++) {
@@ -42,9 +42,9 @@ function getPossibleChords(fretNumber, stringValues, chordNotes, maxDifference, 
 
         for (let i = string; i < fretNumber + string; i++) {
 
-            let note = allNotes[i % 12 - 1]
+            let note = notesMap[i % 12 - 1]
 
-            if (!note) note = allNotes[11]
+            if (!note) note = notesMap[11]
 
             if (chordNotes.includes(note)) {
                 notesInStrings[stringNumber].push(i)
@@ -64,7 +64,7 @@ function getPossibleChords(fretNumber, stringValues, chordNotes, maxDifference, 
 
     for (let i = 0; i < combinations.length; i++) {
 
-        if (mustIncludeAll) if (!chordNotes.every(note => combinations[i].map(item => allNotes[item % 12 - 1] || allNotes[11]).includes(note))) continue;
+        if (mustIncludeAll) if (!chordNotes.every(note => combinations[i].map(item => notesMap[item % 12 - 1] || notesMap[11]).includes(note))) continue;
 
         stringNumber = 0;
 

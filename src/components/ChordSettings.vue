@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import { ref } from "vue"
+
 export default {
 
   name: 'ChordSettings',
@@ -36,6 +38,8 @@ export default {
   data() {
 
     return {
+
+      notesMap: ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"],
 
       dropdownOptions: [
         {
@@ -92,6 +96,8 @@ export default {
 
       chord: ["C", "", "", ""],
 
+      notes: [0, 4, 7],
+
       chordDisplay: 'C'
 
     }
@@ -99,9 +105,107 @@ export default {
   },
 
   methods: {
+
+    formNotes(chord) {
+
+      let notes = []
+
+      // Get root note
+
+      notes[0] = this.notesMap.findIndex(note => note == chord[0])
+
+      if (chord[1] == "\u266F") {
+        notes[0] += 1
+      } else if (chord[1] == "\u266D") {
+        notes[0] -= 1
+      }
+
+      notes[0] = ((notes[0] % this.notesMap.length) + this.notesMap.length) % this.notesMap.length
+
+      // Get 2nd & 3rd note
+
+      notes[2] = notes[0] + 7
+
+      switch (chord[2]) {
+        case "":
+          notes[1] = notes[0] + 4
+          break
+        case "m":
+          notes[1] = notes[0] + 3
+          break
+        case "dim":
+          notes[1] = notes[0] + 3
+          notes[2] = notes[0] + 6
+          break
+        case "aug":
+          notes[1] = notes[0] + 4
+          notes[2] = notes[0] + 8
+          break
+        case "sus\u200B2":
+          notes[1] = notes[0] + 2
+          break
+        case "sus\u200B4":
+          notes[1] = notes[0] + 5
+          break
+      }
+
+      // Get extension note
+
+      switch (chord[3]) {
+        case '7':
+          notes[3] = notes[0] + 10
+          break
+        case '9':
+          notes[3] = notes[0] + 10
+          notes[4] = notes[0] + 2
+          break
+        case '11':
+          notes[3] = notes[0] + 10  // 7th
+          notes[4] = notes[0] + 2   // 9th
+          notes[5] = notes[0] + 5   // 11th
+          break
+        case '13':
+          notes[3] = notes[0] + 10  // 7th
+          notes[4] = notes[0] + 2   // 9th
+          notes[5] = notes[0] + 5   // 11th
+          notes[6] = notes[0] + 9   // 13th
+          break
+        case 'maj\u200B7':
+          notes[3] = notes[0] + 11  // Major 7th
+          break
+        case 'maj\u200B9':
+          notes[3] = notes[0] + 11  // Major 7th
+          notes[4] = notes[0] + 2   // 9th
+          break
+        case 'maj\u200B11':
+          notes[3] = notes[0] + 11  // Major 7th
+          notes[4] = notes[0] + 2   // 9th
+          notes[5] = notes[0] + 5   // 11th
+          break
+        case 'maj\u200B13':
+          notes[3] = notes[0] + 11  // Major 7th
+          notes[4] = notes[0] + 2   // 9th
+          notes[5] = notes[0] + 5   // 11th
+          notes[6] = notes[0] + 9   // 13th
+          break
+        case 'add\u200B9':
+          notes[3] = notes[0] + 2   // 9th
+          break
+      }
+
+      // for (let i of notes) {
+      //   console.log(this.notesMap[i])
+      // }
+
+      return notes
+
+    },
+
     updateChord() {
 
       let chord = JSON.parse(JSON.stringify(this.chord)) // deep copy chord
+
+      this.notes = this.formNotes(chord)
 
       if (chord[2] !== "" && (chord[3].includes("maj") || chord[3].includes("add"))) { // add brakets, ex. Cm(maj7)
         if (chord[2].includes("sus")) { // swap for sus
@@ -123,8 +227,7 @@ export default {
 
       this.chordDisplay = chord.join("")
 
-      console.log(this.chordDisplay)
-      console.log(this.chord)
+      this.notes.forEach(n => this.notesMap[n])
 
     }
   }
