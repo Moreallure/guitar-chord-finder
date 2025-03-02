@@ -35,6 +35,10 @@ export default {
 
   name: 'ChordSettings',
 
+  setup() {
+
+  },
+
   data() {
 
     return {
@@ -120,8 +124,6 @@ export default {
         notes[0] -= 1
       }
 
-      notes[0] = ((notes[0] % this.notesMap.length) + this.notesMap.length) % this.notesMap.length
-
       // Get 2nd & 3rd note
 
       notes[2] = notes[0] + 7
@@ -192,6 +194,8 @@ export default {
           notes[3] = notes[0] + 2   // 9th
           break
       }
+
+      notes = notes.map((n) => ((n % this.notesMap.length) + this.notesMap.length) % this.notesMap.length)
 
       // for (let i of notes) {
       //   console.log(this.notesMap[i])
