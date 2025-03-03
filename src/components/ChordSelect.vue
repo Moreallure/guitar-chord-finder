@@ -4,6 +4,8 @@
 
     <h2>Select Chord</h2>
 
+    <h1 v-html="chordDisplay" id="chord"></h1>
+
     <div class="chordOption">
 
       <div v-for="(option, index) in dropdownOptions" :key="index" class="chordDropdown">
@@ -21,8 +23,6 @@
       </div>
 
     </div>
-
-    <h1 v-html="chordDisplay" id="chord"></h1>
 
   </div>
 
@@ -245,7 +245,7 @@ export default {
 }
 
 .settings {
-  min-width: 50%;
+  margin-bottom: 2rem;
 }
 
 h2 {
@@ -254,6 +254,15 @@ h2 {
   font-family: "Roboto Condensed", Helvetica;
   font-size: 1.5em;
   font-weight: 500;
+}
+
+#chord {
+  font-family: "Campania";
+  text-align: center;
+  font-size: 5em;
+  line-height: 0.8em;
+  color: #274C77;
+  margin-bottom: 1rem;
 }
 
 .chordOption {
@@ -288,15 +297,6 @@ h2 {
 
 #quality, #extension {
   font-size: 1.3em;
-}
-
-#chord {
-  font-family: "Campania";
-  text-align: center;
-  font-size: 5em;
-  line-height: 0.7em;
-  color: #274C77;
-  padding-bottom: 0.7em;
 }
 
 </style>

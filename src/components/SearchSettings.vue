@@ -16,8 +16,9 @@
 
         </div>
 
-        <select name="" id="">
-          <option value="">Guitar (EADGBE)</option>
+        <select name="" id="input1">
+          <option value="">Guitar</option>
+          <option value="">Guitar (7-string)</option>
           <option value="">Ukulele</option>
         </select>
 
@@ -33,7 +34,7 @@
 
         </div>
 
-        <input type="number" name="" id="" value="24">
+        <input type="number" name="" id="input2" value="5">
 
       </div>
 
@@ -47,7 +48,11 @@
 
         </div>
 
-        <input type="checkbox" name="" id="omit-checkbox">
+        <div id="input3">
+
+          <input type="checkbox" name="" checked>
+
+        </div>
 
       </div>
 
@@ -83,10 +88,6 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
-.settings {
-  min-width: 50%;
-}
-
 h2 {
   color: #3e4c57;
   text-align: center;
@@ -110,6 +111,7 @@ h2 {
 
 .searchItem .description {
   width: 300px;
+  margin-right: 1%;
 }
 
 .searchItem .description h3 {
@@ -122,21 +124,36 @@ h2 {
   font-size: 1em;
 }
 
-.searchItem input, .searchItem select {
-  padding: 4px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f9f9f9;
+#input1, #input2, #input3 {
   height: 40px;
   width: 120px;
   text-align: center;
   font-family: "Roboto Condensed", Helvetica;
-  font-size: 2em;
+  font-size: 1.5em;
   box-sizing: border-box;
 }
 
-#omit-checkbox {
+#input1, #input2 {
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+#input3 {
+  position: relative;
+}
+
+#input3 input {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 25px;
   height: 25px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
 }
 
 </style>
