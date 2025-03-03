@@ -2,7 +2,7 @@
 
   <div class="intro">
 
-    <h1>Guitar Chord Searcher</h1>
+    <h1>Guitar Chord Finder</h1>
 
     <h2>A Tool for Guitarists to Find Fingerings of a Chord</h2>
 

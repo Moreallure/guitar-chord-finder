@@ -1,4 +1,4 @@
-function getPossibleChords(fretNumber, stringValues, chordNotes, maxDifference, mustIncludeAll) {
+export function getPossibleChords(fretNumber, stringValues, chordNotes, maxDifference, mustIncludeAll) {
 
     const notesMap = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
@@ -87,14 +87,14 @@ function getPossibleChords(fretNumber, stringValues, chordNotes, maxDifference, 
 
 }
 
-let fretNumber = 18
+// let fretNumber = 18
 
-let stringValues = [5, 10, 3, 8, 12, 5]
+// let stringValues = [5, 10, 3, 8, 12, 5]
 
-let chordNotes = ["C", "E", "G"]
+// let chordNotes = ["C", "E", "G"]
 
-let maxDifference = 5;
+// let maxDifference = 5;
 
-let mustIncludeAll = true;
+// let mustIncludeAll = true;
 
-console.log(getPossibleChords(fretNumber, stringValues, chordNotes, maxDifference, mustIncludeAll))
+// console.log(getPossibleChords(fretNumber, stringValues, chordNotes, maxDifference, mustIncludeAll))
