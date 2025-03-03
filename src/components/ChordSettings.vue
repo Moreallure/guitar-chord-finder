@@ -2,11 +2,11 @@
 
   <div class="settings">
 
-    <h2>Select Chord</h2>
+    <h2 class="title">Select Chord</h2>
 
-    <div class="selection">
+    <div class="chordOption">
 
-      <div v-for="(option, index) in dropdownOptions" :key="index" class="dropdown">
+      <div v-for="(option, index) in dropdownOptions" :key="index" class="chordDropdown">
 
         <p :for="option.id">{{ option.label }}</p>
 
@@ -24,20 +24,66 @@
 
     <h1 v-html="chordDisplay" id="chord"></h1>
 
+    <h2 class="title">Search Settings</h2>
+
+    <div class="searchOption">
+
+      <div class="searchItem">
+
+        <div class="description">
+
+          <h3>Instrument</h3>
+
+          <p>Instrument of fingerings.</p>
+
+        </div>
+
+        <select name="" id="">
+          <option value="">Guitar (EADGBE)</option>
+          <option value="">Ukulele</option>
+        </select>
+
+      </div>
+
+      <div class="searchItem">
+
+        <div class="description">
+
+          <h3>Max Fret Span</h3>
+
+          <p>Maxinum span of frets in the fingering.</p>
+
+        </div>
+
+        <input type="number" name="" id="" value="24">
+
+      </div>
+
+      <div class="searchItem">
+
+        <div class="description">
+
+          <h3>Omit Incomplete Chord</h3>
+
+          <p>Wheather if to omit the fingerings that does not include all the notes in the chord.</p>
+
+        </div>
+
+        <input type="checkbox" name="" id="omit-checkbox">
+
+      </div>
+
+    </div>
+
   </div>
 
 </template>
 
 <script>
-import { ref } from "vue"
 
 export default {
 
   name: 'ChordSettings',
-
-  setup() {
-
-  },
 
   data() {
 
@@ -197,9 +243,9 @@ export default {
 
       notes = notes.map((n) => ((n % this.notesMap.length) + this.notesMap.length) % this.notesMap.length)
 
-      // for (let i of notes) {
-      //   console.log(this.notesMap[i])
-      // }
+      for (let i of notes) {
+        console.log(this.notesMap[i])
+      }
 
       return notes
 
@@ -253,7 +299,7 @@ export default {
   min-width: 50%;
 }
 
-h2 {
+.title {
   color: #3e4c57;
   text-align: center;
   font-family: "Roboto Condensed", Helvetica;
@@ -261,25 +307,25 @@ h2 {
   font-weight: 500;
 }
 
-.selection {
+.chordOption {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
 }
 
-.dropdown {
+.chordDropdown {
   margin: 1%;
   text-align: center;
 }
 
-.dropdown p {
+.chordDropdown p {
   font-family: "Roboto Condensed", Helvetica;
   margin: 5% 0;
   color: #6096BA;
 }
 
-.dropdown select {
+.chordDropdown select {
   padding: 4px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -299,7 +345,53 @@ h2 {
   font-family: "Campania";
   text-align: center;
   font-size: 5em;
+  line-height: 0.7em;
   color: #274C77;
+  padding-bottom: 0.7em;
+}
+
+.searchOption {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto Condensed", Helvetica;
+  margin: 0.8% 0;
+}
+
+.searchItem .description {
+  width: 300px;
+}
+
+.searchItem .description h3 {
+  color: #274C77;
+  font-size: 1.5em;
+}
+
+.searchItem .description p {
+  color: #6096BA;
+  font-size: 1em;
+}
+
+.searchItem input, .searchItem select {
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  height: 40px;
+  width: 120px;
+  text-align: center;
+  font-family: "Roboto Condensed", Helvetica;
+  font-size: 2em;
+  box-sizing: border-box;
+}
+
+#omit-checkbox {
+  height: 25px;
 }
 
 </style>
