@@ -1,7 +1,5 @@
 export function getPossibleChords(fretNumber, stringValues, chordNotes, maxDifference, mustIncludeAll) {
 
-    const notesMap = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-
     function hasDifferenceGreaterThanN(difference, numbers) {
         for (let i = 0; i < numbers.length; i++) {
             for (let j = i + 1; j < numbers.length; j++) {
@@ -15,86 +13,51 @@ export function getPossibleChords(fretNumber, stringValues, chordNotes, maxDiffe
     }
 
     function generateCombinations(lists) {
-
         if (lists.length === 0) {
             return [[]];
         }
-
         const [firstList, ...restLists] = lists;
         const restCombinations = generateCombinations(restLists);
         const result = [];
-
         for (const i of firstList) {
             for (const combination of restCombinations) {
                 result.push([i, ...combination]);
             }
         }
-
         return result;
-
     }
 
-    let notesInStrings = Array.from({ length: stringValues.length }, () => [])
-
-    let stringNumber = 0;
-
-    for (const string of stringValues) {
-
-        for (let i = string; i < fretNumber + string; i++) {
-
-            let note = notesMap[i % 12 - 1]
-
-            if (!note) note = notesMap[11]
-
-            if (chordNotes.includes(note)) {
-                notesInStrings[stringNumber].push(i)
+    // Generate notesInStrings based on semitones modulo 12
+    const notesInStrings = [];
+    for (const stringValue of stringValues) {
+        const notes = [];
+        for (let i = stringValue; i < stringValue + fretNumber; i++) {
+            const semitone = i % 12;
+            if (chordNotes.includes(semitone)) {
+                notes.push(i);
             }
-
         }
-
-        stringNumber ++
-
+        notesInStrings.push(notes);
     }
 
-    stringNumber = 0;
+    const combinations = generateCombinations(notesInStrings);
+    const result = [];
 
-    let combinations = generateCombinations(notesInStrings)
-
-    let result = [];
-
-    for (let i = 0; i < combinations.length; i++) {
-
-        if (mustIncludeAll) if (!chordNotes.every(note => combinations[i].map(item => notesMap[item % 12 - 1] || notesMap[11]).includes(note))) continue;
-
-        stringNumber = 0;
-
-        let newCombination = [];
-
-        for (let note of combinations[i]) {
-
-            newCombination.push(note - stringValues[stringNumber]);
-            stringNumber ++;
-
+    for (const combination of combinations) {
+        // Check if all required chord notes are present
+        if (mustIncludeAll) {
+            const semitones = combination.map(note => note % 12);
+            if (!chordNotes.every(s => semitones.includes(s))) {
+                continue;
+            }
         }
 
-        if (hasDifferenceGreaterThanN(maxDifference, newCombination)) continue;
-
-        result.push(newCombination);
-
+        // Convert to fret numbers and check max spread
+        const fretCombination = combination.map((note, idx) => note - stringValues[idx]);
+        if (!hasDifferenceGreaterThanN(maxDifference, fretCombination)) {
+            result.push(fretCombination);
+        }
     }
 
     return result;
-
 }
-
-// let fretNumber = 18
-
-// let stringValues = [5, 10, 3, 8, 12, 5]
-
-// let chordNotes = ["C", "E", "G"]
-
-// let maxDifference = 5;
-
-// let mustIncludeAll = true;
-
-// console.log(getPossibleChords(fretNumber, stringValues, chordNotes, maxDifference, mustIncludeAll))

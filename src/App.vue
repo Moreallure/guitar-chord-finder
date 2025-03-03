@@ -32,7 +32,7 @@ export default {
   },
   setup() {
 
-    let chordNotes = ["C", "E", "G"];
+    let chordNotes = [0, 4, 7];
     let stringNotes = [5, 10, 3, 8, 12, 5];
     let fretsNum = 24;
     let maxSpan = 5;
