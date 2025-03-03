@@ -2,7 +2,9 @@
 
   <IntroPart/>
 
-  <ChordSettings/>
+  <ChordSelect/>
+
+  <SearchSettings/>
 
   <ChordListings/>
 
@@ -10,14 +12,16 @@
 
 <script>
 import IntroPart from './components/Intro.vue'
-import ChordSettings from './components/ChordSettings.vue'
+import ChordSelect from './components/ChordSelect.vue'
+import SearchSettings from './components/SearchSettings.vue'
 import ChordListings from './components/ChordListings.vue'
 
 export default {
   name: 'App',
   components: {
     IntroPart,
-    ChordSettings,
+    ChordSelect,
+    SearchSettings,
     ChordListings
   }
 }
