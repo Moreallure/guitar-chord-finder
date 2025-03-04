@@ -8,7 +8,7 @@
 
   <SearchButton @button-click="handleSearch" />
 
-  <ChordListings/>
+  <ChordListings :chords="chords" :chordName="chordName" />
 
 </template>
 
@@ -21,7 +21,10 @@ import ChordListings from './components/ChordListings.vue'
 
 import { getPossibleChords } from './algorithm'
 
+import { ref } from 'vue';
+
 export default {
+
   name: 'App',
   components: {
     IntroPart,
@@ -32,6 +35,9 @@ export default {
   },
   setup() {
 
+    const chords = ref([]);
+    const chordName = ref("")
+
     let chordNotes = ["C", "E", "G"];
     let stringNotes = [5, 10, 3, 8, 12, 5];
     let fretsNum = 24;
@@ -39,13 +45,15 @@ export default {
     let omitIncomplete = true;
 
     const handleSearch = () => {
-      console.log(fretsNum, stringNotes, chordNotes, maxSpan, omitIncomplete)
-      let chords = getPossibleChords(fretsNum, stringNotes, chordNotes, maxSpan, omitIncomplete)
-      console.log(chords)
+      // console.log(fretsNum, stringNotes, chordNotes, maxSpan, omitIncomplete)
+      chords.value = getPossibleChords(fretsNum, stringNotes, chordNotes, maxSpan, omitIncomplete)
+      console.log(chords.value)
     }
 
-    const handleChordNotes = (notes) => {
+    const handleChordNotes = (notes, name) => {
+      console.log(name)
       chordNotes = notes
+      chordName.value = name
     };
 
     const handleStringNotes = (selected) => {
@@ -59,7 +67,7 @@ export default {
         case "Ukulele":
           stringNotes = [8, 1, 5, 10]
       }
-      console.log(stringNotes)
+      // console.log(stringNotes)
     };
 
     const handleMaxSpan = (value) => {
@@ -67,7 +75,6 @@ export default {
     };
 
     const handleOmitIncomplete = (value) => {
-      console.log(value)
       omitIncomplete = value
     };
 
@@ -76,7 +83,9 @@ export default {
       handleChordNotes,
       handleStringNotes,
       handleMaxSpan,
-      handleOmitIncomplete
+      handleOmitIncomplete,
+      chordName,
+      chords
     };
 
   },

@@ -3,7 +3,7 @@
   <div class="result">
 
 
-    <h1>Fingerings for <span class="chord">{{ chordName }}</span> <span class="count">({{ items.length }} found)</span></h1>
+    <h1>Fingerings for <span class="chord" v-html="chordName"></span> <span class="count">({{ chords.length }} found)</span></h1>
 
 
   </div>
@@ -13,13 +13,20 @@
 <script>
 
 export default {
+
   name: 'ChordListings',
-  data() {
-    return {
-      chordName: "C",
-      items: []
+
+  props: {
+    chords: {
+      type: Array,
+      default: () => []
+    },
+    chordName: {
+      type: String,
+      default: ''
     }
   }
+
 }
 
 </script>
