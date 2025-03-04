@@ -1,100 +1,81 @@
 export function getPossibleChords(fretNumber, stringValues, chordNotes, maxDifference, mustIncludeAll) {
-
     const notesMap = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
-    function hasDifferenceGreaterThanN(difference, numbers) {
-        for (let i = 0; i < numbers.length; i++) {
-            for (let j = i + 1; j < numbers.length; j++) {
-                if ([numbers[i], numbers[j]].includes(0)) continue;
-                if (Math.abs(numbers[i] - numbers[j]) > difference) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    function generateCombinations(lists) {
-
-        if (lists.length === 0) {
-            return [[]];
-        }
-
-        const [firstList, ...restLists] = lists;
-        const restCombinations = generateCombinations(restLists);
-        const result = [];
-
-        for (const i of firstList) {
-            for (const combination of restCombinations) {
-                result.push([i, ...combination]);
-            }
-        }
-
-        return result;
-
-    }
-
-    let notesInStrings = Array.from({ length: stringValues.length }, () => [])
-
-    let stringNumber = 0;
-
-    for (const string of stringValues) {
-
-        for (let i = string; i < fretNumber + string; i++) {
-
-            let note = notesMap[i % 12 - 1]
-
-            if (!note) note = notesMap[11]
-
+    // Precompute notesData and stringNotes for each string
+    const notesData = [];
+    const stringNotes = [];
+    for (let s = 0; s < stringValues.length; s++) {
+        const stringValue = stringValues[s];
+        const currentData = [];
+        const currentNotes = new Set();
+        for (let i = stringValue; i < stringValue + fretNumber; i++) {
+            const noteValue = i % 12;
+            const noteIndex = noteValue === 0 ? 11 : noteValue - 1;
+            const note = notesMap[noteIndex];
             if (chordNotes.includes(note)) {
-                notesInStrings[stringNumber].push(i)
+                const fret = i - stringValue;
+                currentData.push({ fret, note });
+                currentNotes.add(note);
+            }
+        }
+        notesData.push(currentData);
+        stringNotes.push(currentNotes);
+    }
+
+    // Precompute chordNoteToStrings: which strings can play each chord note
+    const chordNoteToStrings = {};
+    for (const note of chordNotes) {
+        chordNoteToStrings[note] = [];
+        for (let s = 0; s < stringNotes.length; s++) {
+            if (stringNotes[s].has(note)) {
+                chordNoteToStrings[note].push(s);
+            }
+        }
+    }
+
+    const result = [];
+
+    // Backtracking function
+    function backtrack(currentCombination, currentNotes, currentMin, currentMax, stringIndex) {
+        if (stringIndex === stringValues.length) {
+            if (mustIncludeAll && currentNotes.size !== chordNotes.length) return;
+            result.push([...currentCombination]);
+            return;
+        }
+
+        const currentStringData = notesData[stringIndex];
+        for (const { fret, note } of currentStringData) {
+            const newNotes = new Set(currentNotes);
+            newNotes.add(note);
+
+            let newMin = currentMin;
+            let newMax = currentMax;
+            if (fret !== 0) {
+                newMin = Math.min(newMin, fret);
+                newMax = Math.max(newMax, fret);
             }
 
+            // Check maxDifference constraint
+            if (newMin !== Infinity && newMax - newMin > maxDifference) continue;
+
+            // Forward check for remaining notes if needed
+            if (mustIncludeAll) {
+                const remainingNotes = chordNotes.filter(n => !newNotes.has(n));
+                let canCover = true;
+                for (const n of remainingNotes) {
+                    const availableStrings = chordNoteToStrings[n];
+                    if (!availableStrings.some(s => s > stringIndex)) {
+                        canCover = false;
+                        break;
+                    }
+                }
+                if (!canCover) continue;
+            }
+
+            backtrack([...currentCombination, fret], newNotes, newMin, newMax, stringIndex + 1);
         }
-
-        stringNumber ++
-
     }
 
-    stringNumber = 0;
-
-    let combinations = generateCombinations(notesInStrings)
-
-    let result = [];
-
-    for (let i = 0; i < combinations.length; i++) {
-
-        if (mustIncludeAll) if (!chordNotes.every(note => combinations[i].map(item => notesMap[item % 12 - 1] || notesMap[11]).includes(note))) continue;
-
-        stringNumber = 0;
-
-        let newCombination = [];
-
-        for (let note of combinations[i]) {
-
-            newCombination.push(note - stringValues[stringNumber]);
-            stringNumber ++;
-
-        }
-
-        if (hasDifferenceGreaterThanN(maxDifference, newCombination)) continue;
-
-        result.push(newCombination);
-
-    }
-
+    backtrack([], new Set(), Infinity, -Infinity, 0);
     return result;
-
 }
-
-// let fretNumber = 18
-
-// let stringValues = [5, 10, 3, 8, 12, 5]
-
-// let chordNotes = ["C", "E", "G"]
-
-// let maxDifference = 5;
-
-// let mustIncludeAll = true;
-
-// console.log(getPossibleChords(fretNumber, stringValues, chordNotes, maxDifference, mustIncludeAll))
