@@ -2,9 +2,9 @@
 
   <IntroPart/>
 
-  <ChordSelect/>
+  <ChordSelect  @chord-update="handleChordNotes" />
 
-  <SearchSettings/>
+  <SearchSettings @instrument-update="handleStringNotes" @span-update="handleMaxSpan" @omit-update="handleOmitIncomplete" />
 
   <SearchButton @button-click="handleSearch" />
 
@@ -32,36 +32,51 @@ export default {
   },
   setup() {
 
-    let chordNotes = [0, 4, 7];
+    let chordNotes = ["C", "E", "G"];
     let stringNotes = [5, 10, 3, 8, 12, 5];
     let fretsNum = 24;
     let maxSpan = 5;
     let omitIncomplete = true;
 
     const handleSearch = () => {
+      console.log(fretsNum, stringNotes, chordNotes, maxSpan, omitIncomplete)
       let chords = getPossibleChords(fretsNum, stringNotes, chordNotes, maxSpan, omitIncomplete)
       console.log(chords)
     }
 
-    // const handleChordNotes = (notes) => {
-    //   chordNotes = notes
-    // };
+    const handleChordNotes = (notes) => {
+      chordNotes = notes
+    };
 
-    // const handleStringNotes = (selected) => {
-    //   stringNotes = selected
-    //   fretsNum = selected
-    // };
+    const handleStringNotes = (selected) => {
+      switch (selected) {
+        case "Guitar":
+          stringNotes = [5, 10, 3, 8, 12, 5];
+          break;
+        case "Guitar (7-string)":
+          stringNotes = [12, 5, 10, 3, 8, 12, 5]
+          break;
+        case "Ukulele":
+          stringNotes = [8, 1, 5, 10]
+      }
+      console.log(stringNotes)
+    };
 
-    // const handleMaxSpan = (value) => {
-    //   maxSpan = value
-    // };
+    const handleMaxSpan = (value) => {
+      maxSpan = value
+    };
 
-    // const handleOmitIncomplete = (value) => {
-    //   omitIncomplete = value
-    // };
+    const handleOmitIncomplete = (value) => {
+      console.log(value)
+      omitIncomplete = value
+    };
 
     return {
-      handleSearch
+      handleSearch,
+      handleChordNotes,
+      handleStringNotes,
+      handleMaxSpan,
+      handleOmitIncomplete
     };
 
   },

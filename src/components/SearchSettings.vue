@@ -16,10 +16,10 @@
 
         </div>
 
-        <select name="" id="input1">
-          <option value="">Guitar</option>
-          <option value="">Guitar (7-string)</option>
-          <option value="">Ukulele</option>
+        <select name="" id="input1" @change="((event) => this.$emit('instrument-update', event.target.value))">
+          <option value="Guitar">Guitar</option>
+          <option value="Guitar (7-string)">Guitar (7-string)</option>
+          <option value="Ukulele">Ukulele</option>
         </select>
 
       </div>
@@ -34,7 +34,7 @@
 
         </div>
 
-        <input type="number" name="" id="input2" value="5">
+        <input type="number" name="" id="input2" value="5" @change="((event) => this.$emit('span-update', event.target.value))">
 
       </div>
 
@@ -50,7 +50,7 @@
 
         <div id="input3">
 
-          <input type="checkbox" name="" checked>
+          <input type="checkbox" name="" checked @change="((event) => this.$emit('omit-update', event.target.checked))">
 
         </div>
 

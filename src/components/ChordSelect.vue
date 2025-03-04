@@ -192,9 +192,9 @@ export default {
 
       notes = notes.map((n) => ((n % this.notesMap.length) + this.notesMap.length) % this.notesMap.length)
 
-      for (let i of notes) {
-        console.log(this.notesMap[i])
-      }
+      notes = notes.map((n) => this.notesMap[n])
+
+      console.log(notes)
 
       return notes
 
@@ -205,6 +205,7 @@ export default {
       let chord = JSON.parse(JSON.stringify(this.chord)) // deep copy chord
 
       this.notes = this.formNotes(chord)
+      this.$emit('chord-update', this.notes);
 
       if (chord[2] !== "" && (chord[3].includes("maj") || chord[3].includes("add"))) { // add brakets, ex. Cm(maj7)
         if (chord[2].includes("sus")) { // swap for sus
