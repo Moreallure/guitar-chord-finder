@@ -8,7 +8,7 @@
 
   <SearchButton @button-click="handleSearch" />
 
-  <ChordListings :chords="chords" :chordName="chordName" />
+  <ChordListings :chords="chords" :chordsInNotes="chordsInNotes" :chordName="chordName" />
 
 </template>
 
@@ -36,7 +36,8 @@ export default {
   setup() {
 
     const chords = ref([]);
-    const chordName = ref("")
+    const chordsInNotes = ref([]);
+    const chordName = ref("C")
 
     let chordNotes = ["C", "E", "G"];
     let stringNotes = [5, 10, 3, 8, 12, 5];
@@ -45,13 +46,29 @@ export default {
     let omitIncomplete = true;
 
     const handleSearch = () => {
-      // console.log(fretsNum, stringNotes, chordNotes, maxSpan, omitIncomplete)
       chords.value = getPossibleChords(fretsNum, stringNotes, chordNotes, maxSpan, omitIncomplete)
-      console.log(chords.value)
+
+      let chordCount = 0
+      let noteCount = 0
+
+      for (let chord of chords.value) {
+
+        chordsInNotes.value[chordCount] = []
+
+        noteCount = 0
+
+        for (let i of chord) {
+          chordsInNotes.value[chordCount][noteCount] = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"][(i + stringNotes[noteCount]) % 12 - 1] || "B"
+          noteCount += 1
+        }
+
+        chordCount += 1
+
+      }
+
     }
 
     const handleChordNotes = (notes, name) => {
-      console.log(name)
       chordNotes = notes
       chordName.value = name
     };
@@ -67,7 +84,6 @@ export default {
         case "Ukulele":
           stringNotes = [8, 1, 5, 10]
       }
-      // console.log(stringNotes)
     };
 
     const handleMaxSpan = (value) => {
@@ -85,6 +101,7 @@ export default {
       handleMaxSpan,
       handleOmitIncomplete,
       chordName,
+      chordsInNotes,
       chords
     };
 
