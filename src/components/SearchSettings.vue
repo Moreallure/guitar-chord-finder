@@ -131,6 +131,7 @@ h2 {
   font-family: "Roboto Condensed", Helvetica;
   font-size: 1.5em;
   box-sizing: border-box;
+  appearance: none;
 }
 
 #input1, #input2 {
@@ -154,6 +155,27 @@ h2 {
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: #f9f9f9;
+}
+
+
+@media screen and (max-width: 640px) {
+
+  h2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .searchItem .description {
+    width: 50vw;
+  }
+
+  .searchItem .description h3 {
+    font-size: 1.3em;
+  }
+
+  .searchItem .description p {
+    font-size: 0.9em;
+  }
+
 }
 
 </style>

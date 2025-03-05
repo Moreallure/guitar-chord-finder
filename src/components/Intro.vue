@@ -6,7 +6,7 @@
 
     <h2>A Tool for Guitarists to Find Fingerings of a Chord</h2>
 
-    <a href="#">A Moreallure Project</a>
+    <a href="http://moreallure.vercel.app/">A Moreallure Project</a>
 
   </div>
 
@@ -68,7 +68,7 @@ a:hover {
   }
 
   h1 {
-    font-size: 10vw;
+    font-size: 13vw;
     margin: 5%;
   }
 

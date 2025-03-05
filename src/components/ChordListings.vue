@@ -121,4 +121,21 @@ export default {
   font-weight: 300;
 }
 
+@media screen and (max-width: 640px) {
+
+  .result h1 {
+    font-size: 2em;
+    line-height: 1em;
+  }
+
+  .result h1 .chord {
+    font-size: 1.5em;
+  }
+
+  .result h1 .count {
+    font-size: 0.7em;
+  }
+
+}
+
 </style>

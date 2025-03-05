@@ -194,8 +194,6 @@ export default {
 
       notes = notes.map((n) => this.notesMap[n])
 
-      console.log(notes)
-
       return notes
 
     },
@@ -248,6 +246,7 @@ export default {
 
 .settings {
   margin-bottom: 2rem;
+  padding: 0 1rem;
 }
 
 h2 {
@@ -272,6 +271,7 @@ h2 {
   justify-content: center;
   align-items: center;
   margin: auto;
+  flex-wrap: wrap;
 }
 
 .chordDropdown {
@@ -295,10 +295,20 @@ h2 {
   text-align: center;
   font-family: "Roboto Condensed", Helvetica;
   font-size: 2em;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 #quality, #extension {
   font-size: 1.3em;
+}
+
+@media screen and (max-width: 640px) {
+
+  #chord {
+    font-size: 4em;
+  }
+
 }
 
 </style>
