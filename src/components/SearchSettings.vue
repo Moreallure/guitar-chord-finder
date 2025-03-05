@@ -10,9 +10,9 @@
 
         <div class="description">
 
-          <h3>Instrument</h3>
+          <h3>Instrument Type</h3>
 
-          <p>Instrument of fingerings.</p>
+          <p>Select your stringed instrument.</p>
 
         </div>
 
@@ -28,9 +28,9 @@
 
         <div class="description">
 
-          <h3>Max Fret Span</h3>
+          <h3>Maximum Fret Distance</h3>
 
-          <p>Maxinum span of frets in the fingering.</p>
+          <p>The maximum allowed distance between frets.</p>
 
         </div>
 
@@ -44,7 +44,7 @@
 
           <h3>Omit Incomplete Chord</h3>
 
-          <p>Wheather if to omit the fingerings that does not include all the notes in the chord.</p>
+          <p>Omit fingerings missing one or more chord component notes.</p>
 
         </div>
 
