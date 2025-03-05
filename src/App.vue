@@ -8,7 +8,7 @@
 
   <SearchButton @button-click="handleSearch" />
 
-  <ChordListings :chords="chords" :chordsInNotes="chordsInNotes" :chordName="chordName" />
+  <ChordListings :chords="chords" :chordsInNotes="chordsInNotes" :chordName="chordNameDisplay" />
 
 </template>
 
@@ -37,7 +37,9 @@ export default {
 
     const chords = ref([]);
     const chordsInNotes = ref([]);
-    const chordName = ref("C")
+
+    let chordName = "C"
+    const chordNameDisplay = ref("")
 
     let chordNotes = ["C", "E", "G"];
     let stringNotes = [5, 10, 3, 8, 12, 5];
@@ -46,6 +48,9 @@ export default {
     let omitIncomplete = true;
 
     const handleSearch = () => {
+
+      chordNameDisplay.value = chordName
+
       chords.value = getPossibleChords(fretsNum, stringNotes, chordNotes, maxSpan, omitIncomplete)
 
       let chordCount = 0
@@ -70,7 +75,7 @@ export default {
 
     const handleChordNotes = (notes, name) => {
       chordNotes = notes
-      chordName.value = name
+      chordName = name
     };
 
     const handleStringNotes = (selected) => {
@@ -100,7 +105,7 @@ export default {
       handleStringNotes,
       handleMaxSpan,
       handleOmitIncomplete,
-      chordName,
+      chordNameDisplay,
       chordsInNotes,
       chords
     };
@@ -116,6 +121,7 @@ export default {
 
 body {
   background-color: #e7ecef;
+  padding-bottom: 3rem;
 }
 
 </style>

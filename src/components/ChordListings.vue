@@ -1,6 +1,6 @@
 <template>
 
-  <div class="result">
+  <div class="result" v-if="chordName !== ''">
 
     <h1>Fingerings for <span class="chord" v-html="chordName"></span> <span class="count">({{ chords.length }} found)</span></h1>
 
@@ -62,7 +62,6 @@ export default {
   width: 80%;
   margin: auto;
   font-family: "Roboto Condensed", Helvetica;
-  margin-bottom: 3rem;
 }
 
 .result h1 {
@@ -88,18 +87,18 @@ export default {
 }
 
 .item {
-  background-color: #617989;
+  background-color: #7a97aa;
   color: #e7ecef;
-  border-radius: 5px;
-  margin: 0.5rem;
-  padding: 1%;
-  padding-bottom: 2%;
-  /* width: fit-content; */
+  border-radius: 7px;
+  margin: 0.4rem;
+  padding: 0.8rem;
+  padding-bottom: 1.7rem;
   display: inline-block;
   flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .item .note {
