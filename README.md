@@ -1,35 +1,21 @@
-# Vue.js
+# Guitar Chord Finder
 
-This directory is a brief example of a [Vue.js](https://vuejs.org/) app that can be deployed to Vercel with zero configuration.
+This is a Vue.js app designed for guitar players to search for all possible fingerings of a selected musical chord.
 
-## Deploy Your Own
+Deployed on Netlify: https://guitarchordfinder.netlify.app/
 
-Deploy your own Vue.js project with Vercel.
+## Usage
+- Choose the chord for which you want to find fingerings by specifying the root note, accidentals, quality, and expansion.
+- If needed, adjust the search settings to customize your search.
+- Click 'Search' and view the results.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/examples/tree/main/framework-boilerplates/vue&template=vue)
+## Search Settings
 
-_Live Example: https://vue-template.vercel.app_
+#### Instrument Type
+Select the instrument for which you want to find fingerings. Available options include guitar, 7-string guitar, and ukulele.
 
-## Running Locally
+#### Maximum Fret Distance
+Specify the maximum allowed distance between frets for a fingering.
 
-```
-yarn install
-```
-
-#### Compile and hot-reload for development
-
-```
-yarn serve
-```
-
-#### Compile and minify for production
-
-```
-yarn build
-```
-
-#### Lint and fix files
-
-```
-yarn lint
-```
+#### Omit Incomplete Chord
+Choose whether to omit fingerings that are missing one or more component notes of the chord.
