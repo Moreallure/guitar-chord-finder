@@ -19,3 +19,6 @@ Specify the maximum allowed distance between frets for a fingering.
 
 #### Omit Incomplete Chord
 Choose whether to omit fingerings that are missing one or more component notes of the chord.
+
+## License
+[GPL-2.0 license](https://www.gnu.org/licenses/old-licenses/lgpl-2.0.html)
