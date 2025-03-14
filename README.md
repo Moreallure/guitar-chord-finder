@@ -1,5 +1,7 @@
 # Guitar Chord Finder
 
+![image](https://github.com/user-attachments/assets/0c35fd83-7c50-4a1f-9e90-06e04be9eb8b)
+
 This is a Vue.js app designed for guitar players to search for all possible fingerings of a selected musical chord.
 
 Deployed on Netlify: https://guitarchordfinder.netlify.app/
